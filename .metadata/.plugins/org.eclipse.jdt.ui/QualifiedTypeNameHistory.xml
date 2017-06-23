@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="database.Username_Validation"/>
+<fullyQualifiedTypeName name="database.Credential_Validation"/>
+<fullyQualifiedTypeName name="javafx.scene.control.PasswordField"/>
+<fullyQualifiedTypeName name="database.Database_Command"/>
+</qualifiedTypeNameHistroy>

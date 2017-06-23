@@ -1,0 +1,25 @@
+package database;
+
+import java.sql.*;
+
+public class Database_Command 
+{
+	static Connection connection;
+	static Statement statement;
+	
+	private Database_Command(){}
+	
+	//Method gives user capability to send commands to the server
+	public static ResultSet execute(String args)throws SQLException
+	{
+		//Connect to the database
+		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/server_clients", "root", "luxray405");
+		
+		//Create a statement for the query
+		statement = connection.createStatement();
+		
+		//Returns ResultSet
+		return statement.executeQuery(args);
+		
+	}
+}
