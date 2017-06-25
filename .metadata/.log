@@ -5409,3 +5409,937 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2017-06-23 14:43:45.864 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_121
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.recommenders.chain.rcp 4 0 2017-06-23 14:43:47.379
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.chain.rcp [365]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp; bundle-version="[2.4.6,2.4.7]"
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.chain.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.chain.rcp"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.chain.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.chain.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.chain.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.chain.rcp"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.recommenders.completion.rcp)(&(bundle-version>=2.4.6)(bundle-version<=2.4.7)))
+     |
+    provide: [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"] osgi.wiring.bundle; {bundle-version=2.4.6.v20170307-1041, osgi.wiring.bundle=org.eclipse.recommenders.completion.rcp}
+  org.eclipse.recommenders.completion.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.completion.rcp 4 0 2017-06-23 14:43:47.424
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp [366]
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"] because it is exposed to package 'com.google.common.primitives' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.collect)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.collect; uses:=com.google.common.primitives
+    export: osgi.wiring.package=com.google.common.primitives
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.e4.ui.di 2 0 2017-06-23 14:43:47.438
+!MESSAGE [SCR] Found components with duplicated names! Details: 
+Component1 : Component[
+	name = org.eclipse.e4.ui.di.events
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.e4.ui.internal.di.UIEventObjectSupplier
+	state = Unsatisfied
+	properties = {dependency.injection.annotation=org.eclipse.e4.ui.di.UIEventTopic}
+	serviceFactory = false
+	serviceInterface = [org.eclipse.e4.core.di.suppliers.ExtendedObjectSupplier]
+	references = null
+	located in bundle = org.eclipse.e4.ui.di_1.0.0.v20130515-1857 [509]
+]
+Component2: Component[
+	name = org.eclipse.e4.ui.di.events
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.e4.ui.internal.di.UIEventObjectSupplier
+	state = Unsatisfied
+	properties = {dependency.injection.annotation=org.eclipse.e4.ui.di.UIEventTopic}
+	serviceFactory = false
+	serviceInterface = [org.eclipse.e4.core.di.suppliers.ExtendedObjectSupplier]
+	references = {
+		Reference[name = EventAdmin, interface = org.osgi.service.event.EventAdmin, policy = static, cardinality = 1..1, target = null, bind = setEventAdmin, unbind = null]
+	}
+	located in bundle = org.eclipse.e4.ui.di_1.1.100.v20160506-0759 [102]
+]  
+
+!ENTRY org.eclipse.equinox.event 2 0 2017-06-23 14:43:47.441
+!MESSAGE [SCR] Found components with duplicated names! Details: 
+Component1 : Component[
+	name = org.eclipse.equinox.event
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.equinox.internal.event.EventComponent
+	state = Unsatisfied
+	properties = 
+	serviceFactory = false
+	serviceInterface = [org.osgi.service.event.EventAdmin]
+	references = null
+	located in bundle = org.eclipse.equinox.event_1.3.0.v20130327-1442 [520]
+]
+Component2: Component[
+	name = org.eclipse.equinox.event
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.equinox.internal.event.EventComponent
+	state = Unsatisfied
+	properties = 
+	serviceFactory = false
+	serviceInterface = [org.osgi.service.event.EventAdmin]
+	references = null
+	located in bundle = org.eclipse.equinox.event_1.3.200.v20160324-1850 [146]
+]  
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2017-06-23 14:43:47.444
+!MESSAGE [SCR] Found components with duplicated names! Details: 
+Component1 : Component[
+	name = org.eclipse.equinox.p2.transport.ecf
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.equinox.internal.p2.transport.ecf.ECFTransportComponent
+	state = Unsatisfied
+	properties = {p2.agent.servicename=org.eclipse.equinox.internal.p2.repository.Transport}
+	serviceFactory = false
+	serviceInterface = [org.eclipse.equinox.p2.core.spi.IAgentServiceFactory]
+	references = null
+	located in bundle = org.eclipse.equinox.p2.transport.ecf_1.1.0.v20130516-1858 [527]
+]
+Component2: Component[
+	name = org.eclipse.equinox.p2.transport.ecf
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.equinox.internal.p2.transport.ecf.ECFTransportComponent
+	state = Unsatisfied
+	properties = {p2.agent.servicename=org.eclipse.equinox.internal.p2.repository.Transport}
+	serviceFactory = false
+	serviceInterface = [org.eclipse.equinox.p2.core.spi.IAgentServiceFactory]
+	references = null
+	located in bundle = org.eclipse.equinox.p2.transport.ecf_1.1.201.v20161115-1927 [178]
+]  
+
+!ENTRY org.eclipse.recommenders.completion.rcp.calls 4 0 2017-06-23 14:43:47.518
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp.calls [549]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.extdoc.rcp; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.recommenders.extdoc.rcp; bundle-version="1.0.5.v20130822-0858-b90"; singleton:="true"
+       org.eclipse.recommenders.extdoc.rcp [557]
+         No resolution report for the bundle.  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp.calls [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.calls"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp.calls [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.calls"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp.calls [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.calls"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.rcp)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.rcp"; singleton:="true"
+  org.eclipse.recommenders.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.completion.rcp.chain 4 0 2017-06-23 14:43:47.572
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp.chain [550]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp.chain [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.chain"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp.chain [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.chain"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp.chain [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.chain"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.utils)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.utils"
+  org.eclipse.recommenders.utils [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.utils"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.completion.rcp.overrides 4 0 2017-06-23 14:43:47.627
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp.overrides [552]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp.overrides [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.overrides"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp.overrides [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.overrides"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp.overrides [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.overrides"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.rcp)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.rcp"; singleton:="true"
+  org.eclipse.recommenders.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.completion.rcp.templates 4 0 2017-06-23 14:43:47.691
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp.templates [554]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp.calls
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp.calls; bundle-version="1.0.5.v20130822-0858-b90"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp.calls [549]
+         Unresolved requirement: Require-Bundle: org.eclipse.recommenders.extdoc.rcp; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.recommenders.extdoc.rcp; bundle-version="1.0.5.v20130822-0858-b90"; singleton:="true"
+              org.eclipse.recommenders.extdoc.rcp [557]
+                No resolution report for the bundle.         Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+           -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp.templates [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.templates"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp.templates [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.templates"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp.templates [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.templates"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.utils)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.utils"
+  org.eclipse.recommenders.utils [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.utils"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.extdoc.rcp 4 0 2017-06-23 14:43:47.742
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.extdoc.rcp [557]
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.extdoc.rcp [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.extdoc.rcp"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.extdoc.rcp [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.extdoc.rcp"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.extdoc.rcp [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.extdoc.rcp"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.rcp)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.rcp"; singleton:="true"
+  org.eclipse.recommenders.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-06-23 14:44:07.535
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Austin Frost'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.jobs 2 2 2017-06-23 14:44:24.555
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.ui.internal.Workbench$55
+!SESSION 2017-06-24 21:35:34.596 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_121
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.recommenders.chain.rcp 4 0 2017-06-24 21:35:36.475
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.chain.rcp [365]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp; bundle-version="[2.4.6,2.4.7]"
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.chain.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.chain.rcp"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.chain.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.chain.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.chain.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.chain.rcp"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=org.eclipse.recommenders.completion.rcp)(&(bundle-version>=2.4.6)(bundle-version<=2.4.7)))
+     |
+    provide: [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"] osgi.wiring.bundle; {bundle-version=2.4.6.v20170307-1041, osgi.wiring.bundle=org.eclipse.recommenders.completion.rcp}
+  org.eclipse.recommenders.completion.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.completion.rcp 4 0 2017-06-24 21:35:36.491
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp [366]
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"] because it is exposed to package 'com.google.common.primitives' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.completion.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.collect)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.collect; uses:=com.google.common.primitives
+    export: osgi.wiring.package=com.google.common.primitives
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.e4.ui.di 2 0 2017-06-24 21:35:36.507
+!MESSAGE [SCR] Found components with duplicated names! Details: 
+Component1 : Component[
+	name = org.eclipse.e4.ui.di.events
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.e4.ui.internal.di.UIEventObjectSupplier
+	state = Unsatisfied
+	properties = {dependency.injection.annotation=org.eclipse.e4.ui.di.UIEventTopic}
+	serviceFactory = false
+	serviceInterface = [org.eclipse.e4.core.di.suppliers.ExtendedObjectSupplier]
+	references = null
+	located in bundle = org.eclipse.e4.ui.di_1.0.0.v20130515-1857 [509]
+]
+Component2: Component[
+	name = org.eclipse.e4.ui.di.events
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.e4.ui.internal.di.UIEventObjectSupplier
+	state = Unsatisfied
+	properties = {dependency.injection.annotation=org.eclipse.e4.ui.di.UIEventTopic}
+	serviceFactory = false
+	serviceInterface = [org.eclipse.e4.core.di.suppliers.ExtendedObjectSupplier]
+	references = {
+		Reference[name = EventAdmin, interface = org.osgi.service.event.EventAdmin, policy = static, cardinality = 1..1, target = null, bind = setEventAdmin, unbind = null]
+	}
+	located in bundle = org.eclipse.e4.ui.di_1.1.100.v20160506-0759 [102]
+]  
+
+!ENTRY org.eclipse.equinox.event 2 0 2017-06-24 21:35:36.510
+!MESSAGE [SCR] Found components with duplicated names! Details: 
+Component1 : Component[
+	name = org.eclipse.equinox.event
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.equinox.internal.event.EventComponent
+	state = Unsatisfied
+	properties = 
+	serviceFactory = false
+	serviceInterface = [org.osgi.service.event.EventAdmin]
+	references = null
+	located in bundle = org.eclipse.equinox.event_1.3.0.v20130327-1442 [520]
+]
+Component2: Component[
+	name = org.eclipse.equinox.event
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.equinox.internal.event.EventComponent
+	state = Unsatisfied
+	properties = 
+	serviceFactory = false
+	serviceInterface = [org.osgi.service.event.EventAdmin]
+	references = null
+	located in bundle = org.eclipse.equinox.event_1.3.200.v20160324-1850 [146]
+]  
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2017-06-24 21:35:36.513
+!MESSAGE [SCR] Found components with duplicated names! Details: 
+Component1 : Component[
+	name = org.eclipse.equinox.p2.transport.ecf
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.equinox.internal.p2.transport.ecf.ECFTransportComponent
+	state = Unsatisfied
+	properties = {p2.agent.servicename=org.eclipse.equinox.internal.p2.repository.Transport}
+	serviceFactory = false
+	serviceInterface = [org.eclipse.equinox.p2.core.spi.IAgentServiceFactory]
+	references = null
+	located in bundle = org.eclipse.equinox.p2.transport.ecf_1.1.0.v20130516-1858 [527]
+]
+Component2: Component[
+	name = org.eclipse.equinox.p2.transport.ecf
+	activate = activate
+	deactivate = deactivate
+	modified = 
+	configuration-policy = optional
+	factory = null
+	autoenable = true
+	immediate = false
+	implementation = org.eclipse.equinox.internal.p2.transport.ecf.ECFTransportComponent
+	state = Unsatisfied
+	properties = {p2.agent.servicename=org.eclipse.equinox.internal.p2.repository.Transport}
+	serviceFactory = false
+	serviceInterface = [org.eclipse.equinox.p2.core.spi.IAgentServiceFactory]
+	references = null
+	located in bundle = org.eclipse.equinox.p2.transport.ecf_1.1.201.v20161115-1927 [178]
+]  
+
+!ENTRY org.eclipse.recommenders.completion.rcp.calls 4 0 2017-06-24 21:35:36.587
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp.calls [549]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.extdoc.rcp; resolution:="optional"
+    -> Bundle-SymbolicName: org.eclipse.recommenders.extdoc.rcp; bundle-version="1.0.5.v20130822-0858-b90"; singleton:="true"
+       org.eclipse.recommenders.extdoc.rcp [557]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp.calls [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.calls"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp.calls [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.calls"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp.calls [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.calls"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.rcp)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.rcp"; singleton:="true"
+  org.eclipse.recommenders.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.completion.rcp.chain 4 0 2017-06-24 21:35:36.646
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp.chain [550]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp.chain [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.chain"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp.chain [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.chain"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp.chain [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.chain"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.utils)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.utils"
+  org.eclipse.recommenders.utils [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.utils"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.completion.rcp.overrides 4 0 2017-06-24 21:35:36.708
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp.overrides [552]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp.overrides [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.overrides"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp.overrides [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.overrides"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp.overrides [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.overrides"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.rcp)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.rcp"; singleton:="true"
+  org.eclipse.recommenders.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.completion.rcp.templates 4 0 2017-06-24 21:35:36.788
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.completion.rcp.templates [554]
+  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp [366]
+         No resolution report for the bundle.  Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp.calls
+    -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp.calls; bundle-version="1.0.5.v20130822-0858-b90"; singleton:="true"
+       org.eclipse.recommenders.completion.rcp.calls [549]
+         Unresolved requirement: Require-Bundle: org.eclipse.recommenders.completion.rcp
+           -> Bundle-SymbolicName: org.eclipse.recommenders.completion.rcp; bundle-version="2.4.6.v20170307-1041"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.recommenders.extdoc.rcp; resolution:="optional"
+           -> Bundle-SymbolicName: org.eclipse.recommenders.extdoc.rcp; bundle-version="1.0.5.v20130822-0858-b90"; singleton:="true"
+              org.eclipse.recommenders.extdoc.rcp [557]
+                No resolution report for the bundle.  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.completion.rcp.templates [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.templates"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.completion.rcp.templates [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.templates"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.completion.rcp.templates [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.completion.rcp.templates"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.utils)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.utils"
+  org.eclipse.recommenders.utils [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.utils"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.recommenders.extdoc.rcp 4 0 2017-06-24 21:35:36.839
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.eclipse.recommenders.extdoc.rcp [557]
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.eclipse.recommenders.extdoc.rcp [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.extdoc.rcp"; singleton:="true"] because it is exposed to package 'com.google.common.base' from resources com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"] and com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"] via two dependency chains.
+
+Chain 1:
+  org.eclipse.recommenders.extdoc.rcp [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.extdoc.rcp"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=com.google.guava)(&(bundle-version>=10.0.0)(!(bundle-version>=11.0.0))))
+     |
+    provide: osgi.wiring.bundle: com.google.guava
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="10.0.1.v201203051515"; osgi.identity="com.google.guava"]
+
+Chain 2:
+  org.eclipse.recommenders.extdoc.rcp [osgi.identity; type="osgi.bundle"; version:Version="1.0.5.v20130822-0858-b90"; osgi.identity="org.eclipse.recommenders.extdoc.rcp"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.recommenders.rcp)
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="2.4.6.v20170307-1041"; osgi.wiring.bundle="org.eclipse.recommenders.rcp"; singleton:="true"
+  org.eclipse.recommenders.rcp [osgi.identity; type="osgi.bundle"; version:Version="2.4.6.v20170307-1041"; osgi.identity="org.eclipse.recommenders.rcp"; singleton:="true"]
+    import: (&(osgi.wiring.package=com.google.common.base)(&(version>=15.0.0)(!(version>=16.0.0))))
+     |
+    export: osgi.wiring.package: com.google.common.base
+  com.google.guava [osgi.identity; type="osgi.bundle"; version:Version="15.0.0.v201403281430"; osgi.identity="com.google.guava"]
+	at org.eclipse.osgi.container.Module.start(Module.java:444)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1620)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1599)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1571)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1514)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-06-24 21:35:54.079
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Austin Frost'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jdt.core 4 4 2017-06-24 21:38:20.871
+!MESSAGE JavaBuilder handling ImageBuilderInternalException while building: Chat Program
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:795)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Could not delete 'C:\Users\Austin Frost\workspace\Chat_Application\Chat Program\bin\.gitignore'.
+org.eclipse.core.runtime.CoreException: Problems encountered while deleting files.
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:139)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFile(ResourceTree.java:310)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFile(ResourceTree.java:796)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1828)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Could not delete: C:\Users\Austin Frost\workspace\Chat_Application\Chat Program\bin\.gitignore.
+java.nio.file.FileSystemException: C:\Users\Austin Frost\workspace\Chat_Application\Chat Program\bin\.gitignore: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at sun.nio.fs.WindowsFileSystemProvider.implDelete(Unknown Source)
+	at sun.nio.fs.AbstractFileSystemProvider.deleteIfExists(Unknown Source)
+	at java.nio.file.Files.deleteIfExists(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.internalDelete(LocalFile.java:220)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:137)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFile(ResourceTree.java:310)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFile(ResourceTree.java:796)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1828)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 1 org.eclipse.core.resources 4 273 2017-06-24 21:38:20.873
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 2 org.eclipse.core.resources 4 273 2017-06-24 21:38:20.873
+!MESSAGE Could not delete 'C:\Users\Austin Frost\workspace\Chat_Application\Chat Program\bin\.gitignore'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: Problems encountered while deleting files.
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:139)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFile(ResourceTree.java:310)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFile(ResourceTree.java:796)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1828)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Contains: Could not delete: C:\Users\Austin Frost\workspace\Chat_Application\Chat Program\bin\.gitignore.
+java.nio.file.FileSystemException: C:\Users\Austin Frost\workspace\Chat_Application\Chat Program\bin\.gitignore: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at sun.nio.fs.WindowsFileSystemProvider.implDelete(Unknown Source)
+	at sun.nio.fs.AbstractFileSystemProvider.deleteIfExists(Unknown Source)
+	at java.nio.file.Files.deleteIfExists(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.internalDelete(LocalFile.java:220)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:137)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFile(ResourceTree.java:310)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFile(ResourceTree.java:796)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1828)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 3 org.eclipse.core.filesystem 4 273 2017-06-24 21:38:20.874
+!MESSAGE Problems encountered while deleting files.
+!SUBENTRY 4 org.eclipse.core.filesystem 4 273 2017-06-24 21:38:20.874
+!MESSAGE Could not delete: C:\Users\Austin Frost\workspace\Chat_Application\Chat Program\bin\.gitignore.
+!STACK 0
+java.nio.file.FileSystemException: C:\Users\Austin Frost\workspace\Chat_Application\Chat Program\bin\.gitignore: The process cannot access the file because it is being used by another process.
+
+	at sun.nio.fs.WindowsException.translateToIOException(Unknown Source)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)
+	at sun.nio.fs.WindowsFileSystemProvider.implDelete(Unknown Source)
+	at sun.nio.fs.AbstractFileSystemProvider.deleteIfExists(Unknown Source)
+	at java.nio.file.Files.deleteIfExists(Unknown Source)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.internalDelete(LocalFile.java:220)
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:137)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFile(ResourceTree.java:310)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFile(ResourceTree.java:796)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1828)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:782)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:735)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:206)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:246)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:301)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:304)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:360)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:383)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)

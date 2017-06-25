@@ -6,11 +6,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.sql.SQLException;
-
-import database.Credential_Validation;
-import database.Database_Command;
-import date.TimeStamp;
+import database.Login_Helper;
 import exceptions.InvalidUsernameException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -46,10 +42,15 @@ public class ClientGUIStart extends Application
 	Button connectBtn, requestBtn;
 	Stage stage;
 	
+	//Check Text
+	Login_Helper lh;
+	
 	//Elements for initializing GUI
 	@Override
 	public void start(Stage primaryStage)
 	{
+		lh = new Login_Helper();
+		
 		stage = primaryStage;
 		
 		userLbl = new Label("Username:");
@@ -121,9 +122,9 @@ public class ClientGUIStart extends Application
 			}
 		
 			System.out.println(userText.getText());
-			System.out.println(Credential_Validation.isUser(userText.getText(), passText.getText()));
+			System.out.println(lh.isUser(userText.getText(), passText.getText()));
 			
-			if(!Credential_Validation.isUser(userText.getText(), passText.getText()))
+			if(!lh.isUser(userText.getText(), passText.getText()))
 				throw new InvalidUsernameException();
 			
 			//Creates a socket that attempts to connect to the server with the given IP address and port number
@@ -136,9 +137,10 @@ public class ClientGUIStart extends Application
 			ClientOutput.println(userText.getText());
 			
 			//Apply Time Stamp to Database
-			TimeStamp ts = new TimeStamp();
-			Database_Command.execute("update members set Time = " + "'" + ts.toString() + "'" 
-			+ " where username = " + "'" + userText.getText() + "'");
+			lh.recordTime(userText.getText());
+			/*TimeStamp ts = new TimeStamp();
+			dc.execute("update members set Time = " + "'" + ts.toString() + "'" 
+			+ " where username = " + "'" + userText.getText() + "'");*/
 			
 			//Launches ClientGUI after successful connection to server. 
 			//Passes the socket and username as parameters for the class
@@ -184,9 +186,9 @@ public class ClientGUIStart extends Application
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SQLException e) {
+		}/* catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }

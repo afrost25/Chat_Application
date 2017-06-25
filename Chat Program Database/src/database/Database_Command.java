@@ -4,10 +4,10 @@ import java.sql.*;
 
 public class Database_Command 
 {
-	static Connection connection;
-	static Statement statement;
+	Connection connection;
+	Statement statement;
 	
-	private Database_Command()
+	public Database_Command()
 	{
 		//Create a statement for the query
 		try {
@@ -21,15 +21,16 @@ public class Database_Command
 	}
 	
 	//Method gives user capability to send commands to the server
-	public static ResultSet execute(String args)throws SQLException
+	public ResultSet execute(String args)throws SQLException
 	{	
 		//Returns ResultSet
 		return statement.executeQuery(args);
 		
 	}
 	
-	public static void update(String args)
+	public void update(String args)throws SQLException
 	{
-		
+		statement.executeUpdate(args);
 	}
+	
 }
