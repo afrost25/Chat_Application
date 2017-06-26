@@ -11,9 +11,9 @@ public class Login_Helper
 	Database_Command  database;
 	TimeStamp timestamp;
 	
-	public Login_Helper()
+	public Login_Helper(String IPAddress)throws SQLException
 	{
-		database = new Database_Command();
+		database = new Database_Command(IPAddress);
 		timestamp = new TimeStamp();
 	}
 	
@@ -49,7 +49,7 @@ public class Login_Helper
 		
 		try
 		{
-			database.update("update members set Time = " + "'" + time + "'" +" where username = " + "'" + username + "'");
+			database.update("update members set time = " + "'" + time + "'" +" where username = " + "'" + username + "'");
 		}
 		catch(SQLException e)
 		{

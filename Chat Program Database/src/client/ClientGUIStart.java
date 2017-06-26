@@ -2,10 +2,16 @@ package client;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException;
+
 import database.Login_Helper;
 import exceptions.InvalidUsernameException;
 import javafx.application.Application;
@@ -48,9 +54,7 @@ public class ClientGUIStart extends Application
 	//Elements for initializing GUI
 	@Override
 	public void start(Stage primaryStage)
-	{
-		lh = new Login_Helper();
-		
+	{		
 		stage = primaryStage;
 		
 		userLbl = new Label("Username:");
@@ -109,20 +113,15 @@ public class ClientGUIStart extends Application
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Welcome!");
 		primaryStage.show();
-	}
+	} 
 	
 	//Button for GUI that makes server connection
 	private void connectButton_EventHandler()
 	{
 		try
-		{	
-			if(userText.getText().isEmpty())
-			{
-				throw new InvalidUsernameException();
-			}
-		
-			System.out.println(userText.getText());
-			System.out.println(lh.isUser(userText.getText(), passText.getText()));
+		{		
+			
+			lh = new Login_Helper(IPText.getText());
 			
 			if(!lh.isUser(userText.getText(), passText.getText()))
 				throw new InvalidUsernameException();
@@ -137,10 +136,7 @@ public class ClientGUIStart extends Application
 			ClientOutput.println(userText.getText());
 			
 			//Apply Time Stamp to Database
-			lh.recordTime(userText.getText());
-			/*TimeStamp ts = new TimeStamp();
-			dc.execute("update members set Time = " + "'" + ts.toString() + "'" 
-			+ " where username = " + "'" + userText.getText() + "'");*/
+			//lh.recordTime(userText.getText());
 			
 			//Launches ClientGUI after successful connection to server. 
 			//Passes the socket and username as parameters for the class
@@ -148,7 +144,7 @@ public class ClientGUIStart extends Application
 		}
 		
 		//Error handling for program.
-		catch(UnknownHostException e)
+		catch(UnknownHostException | CommunicationsException | ConnectException | MySQLNonTransientConnectionException e)
 		{
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Connection");
@@ -186,9 +182,15 @@ public class ClientGUIStart extends Application
 		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}/* catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		}
+		catch (SQLException e)
+		{
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Connection");
+			alert.setHeaderText("Host Connection Failed");
+			alert.setContentText("Unable to establish connection with the server");
+			
+			alert.showAndWait();
+		}
 	}
 }
