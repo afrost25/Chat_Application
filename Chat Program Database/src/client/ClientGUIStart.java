@@ -136,7 +136,7 @@ public class ClientGUIStart extends Application
 			ClientOutput.println(userText.getText());
 			
 			//Apply Time Stamp to Database
-			//lh.recordTime(userText.getText());
+			lh.recordTime(userText.getText());
 			
 			//Launches ClientGUI after successful connection to server. 
 			//Passes the socket and username as parameters for the class

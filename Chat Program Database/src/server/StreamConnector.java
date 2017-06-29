@@ -13,6 +13,7 @@ public class StreamConnector
 	Scanner ClientInput;
 	PrintWriter ServerInput;
 	InputStream inputStream;
+	String username;
 	
 	public StreamConnector(Socket socket, TextArea serverText)
 	{
@@ -23,7 +24,7 @@ public class StreamConnector
 			ServerInput = new PrintWriter(socket.getOutputStream(), true);
 			
 			String IP = ClientInput.nextLine();
-			String username = ClientInput.nextLine();
+			username = ClientInput.nextLine();
 			
 			serverText.appendText(username + " IP: " + IP + "\n");
 			ServerInput.println("Welcome " + username);
@@ -43,6 +44,11 @@ public class StreamConnector
 	public String getMSG()
 	{
 		return ClientInput.nextLine();
+	}
+	
+	public String getUser()
+	{
+		return username;
 	}
 	
 	public boolean hasNextLine()

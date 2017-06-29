@@ -29,12 +29,37 @@ public class MessengerThread implements Runnable
 					{
 						String message = v.get(i).getMSG();
 						
-						if(message.contains("/"))
+						if(message.indexOf("/") == 0)
 						{
-							//Insert commands for users
+							if(message.contains("online"))
+								v.get(i).sendMSG(ClientCommands.getUsersOnline(v));
+							
+							else if(message.contains("help"))
+								v.get(i).sendMSG(ClientCommands.getHelp());
+							
+							else
+								v.get(i).sendMSG("Unknown Command. Type /help for commmand information");
 						}
 						
-						if(!message.contains("/"))
+						else if(ClientCommands.atSymbol(message))
+						{
+							for(int k = 0; k < v.size(); k++)
+							{
+								if(message.contains("@" + v.get(k).getUser()))
+								{
+									v.get(i).sendMSG(message);
+									v.get(k).sendMSG(message);
+									serverText.appendText(message + "\n");
+								}
+								
+								else
+								{
+									v.get(i).sendMSG("This user is not online");
+								}
+							}
+						}
+						
+						else
 						{
 							serverText.appendText(message + "\n");
 						
