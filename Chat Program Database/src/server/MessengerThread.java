@@ -29,34 +29,41 @@ public class MessengerThread implements Runnable
 					{
 						String message = v.get(i).getMSG();
 						
-						if(message.indexOf("/") == 0)
+						//Command codes						
+						String[] arrayMessage = message.split(" ");
+						if(arrayMessage[1].contains("/"))
 						{
-							if(message.contains("online"))
-								v.get(i).sendMSG(ClientCommands.getUsersOnline(v));
+							if(arrayMessage[1].contains("/online"))
+							{
+								String users = "Users online: \n";
+								
+								for(int k = 0; k < v.size(); k++)
+								{
+									users += v.get(k).getUser();
+									
+									if(k < v.size() - 1)
+										users += "\n";
+								}
+								
+								v.get(i).sendMSG(users);
+							}
 							
-							else if(message.contains("help"))
-								v.get(i).sendMSG(ClientCommands.getHelp());
-							
-							else
-								v.get(i).sendMSG("Unknown Command. Type /help for commmand information");
+							//...
 						}
 						
-						else if(ClientCommands.atSymbol(message))
+						else if(message.contains("@"))
 						{
 							for(int k = 0; k < v.size(); k++)
 							{
 								if(message.contains("@" + v.get(k).getUser()))
 								{
-									v.get(i).sendMSG(message);
+									System.out.println(v.get(k).getUser());
 									v.get(k).sendMSG(message);
-									serverText.appendText(message + "\n");
-								}
-								
-								else
-								{
-									v.get(i).sendMSG("This user is not online");
 								}
 							}
+							
+							v.get(i).sendMSG(message);
+							serverText.appendText(message + "\n");
 						}
 						
 						else
@@ -65,10 +72,10 @@ public class MessengerThread implements Runnable
 						
 							for(int j = 0; j < v.size(); j++)
 							v.get(j).sendMSG(message);
+							
+							if((!message.contains(":")) && message.contains("disconnected"))
+								v.remove(i);
 						}
-						
-						if((!message.contains(":")) && message.contains("disconnected"))
-							v.remove(i);
 					}
 				}
 			}

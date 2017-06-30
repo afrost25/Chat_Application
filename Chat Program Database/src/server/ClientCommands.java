@@ -28,15 +28,4 @@ public class ClientCommands
 				+ "/online";
 		return message;
 	}
-
-	public static boolean atSymbol(String message)
-	{
-		boolean isValid = false;
-		
-		if(message.indexOf("@") == 0 || (message.charAt(message.indexOf("@") + 1) != ' ' 
-				&& message.charAt(message.indexOf("@") - 1) == ' '))
-			isValid = true;
-		
-		return isValid;
-	}
 }

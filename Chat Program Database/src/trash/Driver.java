@@ -10,8 +10,8 @@ public class Driver {
 	public static void main(String[] args) throws SQLException 
 	{
 				
-		//Need to create class that can manipulate data in the server
+		String message = "/online";
 		
+		System.out.print(message.charAt(0) == '/');
 	}
-
 }

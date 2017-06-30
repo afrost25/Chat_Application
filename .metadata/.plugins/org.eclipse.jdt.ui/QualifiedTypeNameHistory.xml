@@ -13,4 +13,5 @@
 <fullyQualifiedTypeName name="com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>
