@@ -1,4 +1,4 @@
-package server;
+package trash;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -6,13 +6,17 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import javafx.scene.control.TextArea;
+import server.ConnectionThread;
+import server.StreamConnector;
 
+@Deprecated
 public class ServerHelper 
 {
 	static Scanner scan = new Scanner(System.in);
 	static ConnectionThread connection;
 	static MessengerThread messenger;
 	static ServerSocket ss;
+	
 	private ServerHelper()
 	{
 		
@@ -24,7 +28,7 @@ public class ServerHelper
 		{
 			 ss = new ServerSocket(port);
 			
-			new Thread(connection = new ConnectionThread(v, ss, serverText)).start();
+			new Thread(connection = new ConnectionThread(v, ss)).start();
 			
 			serverText.appendText("Success! Listening on port " + port + "\n");
 			serverText.appendText("Waiting For Clients..." + "\n");

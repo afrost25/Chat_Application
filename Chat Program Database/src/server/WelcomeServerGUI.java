@@ -1,4 +1,4 @@
-package server;
+ package server;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -43,6 +44,7 @@ public class WelcomeServerGUI extends Application
 		HBox.setMargin(start, new Insets(10));
 		
 		Scene scene = new Scene(portBox);
+		scene.getStylesheets().add("style.css");
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Welcome");
@@ -65,6 +67,9 @@ public class WelcomeServerGUI extends Application
 		{
 			portNum.setText("");
 			Alert alert = new Alert(AlertType.ERROR, "Invalid Port Number");
+			DialogPane dp = alert.getDialogPane();
+			dp.getStylesheets().add("notification.css");
+			
 			alert.show();
 			start(stage);
 		}

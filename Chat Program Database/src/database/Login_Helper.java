@@ -4,15 +4,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import date.TimeStamp;
+import exceptions.OnlineException;
 
 public class Login_Helper
 {
 	
 	Database_Command  database;
 	TimeStamp timestamp;
+	UserStatus status;
 	
 	public Login_Helper(String IPAddress)throws SQLException
 	{
+		status = new UserStatus(IPAddress);
 		database = new Database_Command(IPAddress);
 		timestamp = new TimeStamp();
 	}
@@ -55,5 +58,11 @@ public class Login_Helper
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public void isOnline(String username) throws OnlineException
+	{		
+		if(status.getUsersOnline().contains(username))
+			throw new OnlineException();
 	}
 }

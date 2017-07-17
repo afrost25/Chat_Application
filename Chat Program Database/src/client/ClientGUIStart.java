@@ -14,6 +14,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException;
 
 import database.Login_Helper;
 import exceptions.InvalidUsernameException;
+import exceptions.OnlineException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -52,6 +54,7 @@ public class ClientGUIStart extends Application
 	Login_Helper lh;
 	
 	//Elements for initializing GUI
+	
 	@Override
 	public void start(Stage primaryStage)
 	{		
@@ -108,6 +111,7 @@ public class ClientGUIStart extends Application
 		border.setCenter(vboxButton);
 		
 		Scene scene = new Scene(border, 250, 200);
+		scene.getStylesheets().add("style.css");
 		
 		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
@@ -120,11 +124,12 @@ public class ClientGUIStart extends Application
 	{
 		try
 		{		
-			
 			lh = new Login_Helper(IPText.getText());
 			
 			if(!lh.isUser(userText.getText(), passText.getText()))
 				throw new InvalidUsernameException();
+			
+			lh.isOnline(userText.getText());
 			
 			//Creates a socket that attempts to connect to the server with the given IP address and port number
 			Socket s = new Socket(InetAddress.getByName(IPText.getText()), Integer.parseInt(portText.getText()));
@@ -140,6 +145,7 @@ public class ClientGUIStart extends Application
 			
 			//Launches ClientGUI after successful connection to server. 
 			//Passes the socket and username as parameters for the class
+			stage.setResizable(true);
 			new ClientGUI(s, userText.getText()).start(stage);
 		}
 		
@@ -150,6 +156,8 @@ public class ClientGUIStart extends Application
 			alert.setTitle("Error Connection");
 			alert.setHeaderText("Host Connection Failed");
 			alert.setContentText("Unable to establish connection with the server");
+			DialogPane dp = alert.getDialogPane();
+			dp.getStylesheets().add("notification.css");
 			
 			alert.showAndWait();
 		}
@@ -160,6 +168,8 @@ public class ClientGUIStart extends Application
 			alert.setTitle("Error Connection");
 			alert.setHeaderText("Port Connection Failed");
 			alert.setContentText("Unable to establish connection with the server");
+			DialogPane dp = alert.getDialogPane();
+			dp.getStylesheets().add("notification.css");
 			
 			alert.showAndWait();
 		}
@@ -169,12 +179,19 @@ public class ClientGUIStart extends Application
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Connection");
 			alert.setHeaderText("Invalid Port Number");
-			alert.setContentText("Enter numerical values only");
+			alert.setContentText("Enter numerical values only");	
+			DialogPane dp = alert.getDialogPane();
+			dp.getStylesheets().add("notification.css");
 			
 			alert.showAndWait();
 		}
 		
 		catch(InvalidUsernameException e)
+		{
+			e.message();
+		}
+		
+		catch(OnlineException e)
 		{
 			e.message();
 		}
@@ -189,6 +206,8 @@ public class ClientGUIStart extends Application
 			alert.setTitle("Error Connection");
 			alert.setHeaderText("Host Connection Failed");
 			alert.setContentText("Unable to establish connection with the server");
+			DialogPane dp = alert.getDialogPane();
+			dp.getStylesheets().add("notification.css");
 			
 			alert.showAndWait();
 		}

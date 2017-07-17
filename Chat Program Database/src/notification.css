@@ -1,0 +1,37 @@
+.dialog-pane
+{
+	-fx-border-color: black;
+}
+
+.dialog-pane > .button-bar > .container
+{
+	-fx-background-color: #0f0f0f;
+}
+
+.dialog-pane > .content.label 
+{
+	-fx-background-color: #0f0f0f;
+	-fx-text-fill: white;
+}
+
+.dialog-pane:header .header-panel 
+{
+	-fx-background-color: black;
+}
+
+.dialog-pane:header .header-panel .label
+{
+	-fx-text-fill: white;
+}
+
+.dialog-pane .button
+{
+	 -fx-background-color: black;
+	 -fx-text-fill: white;
+}
+
+.dialog-pane .button:hover
+{
+	 -fx-background-color: white;
+	 -fx-text-fill: black;
+}

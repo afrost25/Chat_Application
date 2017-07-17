@@ -4,23 +4,22 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
 
-public class InvalidUsernameException extends Exception
+public class OnlineException extends Exception
 {
 	/**
-	 * Exception for Invalid Username
+	 * OnlineException
 	 */
-	private static final long serialVersionUID = 3706089183217574909L;
+	private static final long serialVersionUID = 7344172834487091918L;
 
 	public void message()
 	{
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Invalid Entry");
-		alert.setHeaderText("Invalid Username / Password");
-		alert.setContentText("Access Denied");
+		alert.setTitle("Forbidden");
+		alert.setHeaderText("User Online");
+		alert.setContentText("This account is already logged in");
 		DialogPane dp = alert.getDialogPane();
 		dp.getStylesheets().add("notification.css");
 		
 		alert.showAndWait();
 	}
-
 }

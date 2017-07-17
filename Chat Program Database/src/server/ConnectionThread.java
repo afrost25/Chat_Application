@@ -15,11 +15,10 @@ public class ConnectionThread implements Runnable{
 	TextArea serverText;
 	volatile boolean serviceRun = true;
 	
-	public ConnectionThread(Vector<StreamConnector> v, ServerSocket ss, TextArea serverText)
+	public ConnectionThread(Vector<StreamConnector> v, ServerSocket ss)
 	{
 		this.v = v;
 		this.ss = ss;
-		this.serverText = serverText;
 	}
 	
 	@Override
@@ -29,7 +28,7 @@ public class ConnectionThread implements Runnable{
 		{
 			try 
 			{
-				v.add(new StreamConnector(ss.accept(), serverText));	
+				v.add(new StreamConnector(ss.accept()));	
 			}
 			catch(SocketException e)
 			{

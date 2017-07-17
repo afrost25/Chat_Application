@@ -1,10 +1,11 @@
-package client;
+package trash;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 import javafx.scene.control.TextArea;
 
+@Deprecated
 //Class that is used to receive messages from the server and clients
 public class ReceiveThread implements Runnable
 {

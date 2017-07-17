@@ -1,17 +1,13 @@
 package trash;
 
-import java.sql.SQLException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
-
-//import java.sql.*;
 @Deprecated
-public class Driver {
-
-	public static void main(String[] args) throws SQLException 
+public class Driver
+{
+	public static void main(String[] args) throws UnknownHostException
 	{
-				
-		String message = "/online";
-		
-		System.out.print(message.charAt(0) == '/');
+		System.out.println(InetAddress.getLocalHost().getHostAddress());
 	}
 }

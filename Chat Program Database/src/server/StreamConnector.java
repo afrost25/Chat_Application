@@ -6,16 +6,15 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-import javafx.scene.control.TextArea;
-
 public class StreamConnector
 {
 	Scanner ClientInput;
 	PrintWriter ServerInput;
 	InputStream inputStream;
 	String username;
+	String IP;
 	
-	public StreamConnector(Socket socket, TextArea serverText)
+	public StreamConnector(Socket socket)
 	{
 		try
 		{
@@ -23,10 +22,9 @@ public class StreamConnector
 			ClientInput = new Scanner(inputStream);
 			ServerInput = new PrintWriter(socket.getOutputStream(), true);
 			
-			String IP = ClientInput.nextLine();
+			IP = ClientInput.nextLine();
 			username = ClientInput.nextLine();
 			
-			serverText.appendText(username + " IP: " + IP + "\n");
 			ServerInput.println("Welcome " + username);
 			
 		}
@@ -65,6 +63,11 @@ public class StreamConnector
 		}
 		
 		return hasNext;
+	}
+	
+	public String getIP()
+	{
+		return IP;
 	}
 }
 
