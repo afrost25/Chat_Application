@@ -9,12 +9,10 @@ import database.UserStatus;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -26,9 +24,7 @@ public class ServerGUI extends Application
 	static Vector<StreamConnector> v;
 	ServerHelper sh;
 	UserStatus us;
-	private Label usersLabel;
 	
-	Task<Void> updater;
 	Task<Void> heartbeat;
 	
 	int portNum;
@@ -39,15 +35,12 @@ public class ServerGUI extends Application
 		sh = new ServerHelper();
 		us = new UserStatus("127.0.0.1");
 		heartbeat = new ServerHeartbeat();
-		updater = new LabelUpdater();
 		new Thread(heartbeat).start();
-		new Thread(updater).start();
 	}
 	
 	@Override
 	public void start(Stage primaryStage)
 	{
-		usersLabel = new Label("Online:");
 		//users.textProperty().bind(updater.messageProperty());
 		
 		//Appends the text "Chat Server" to server log
@@ -61,18 +54,9 @@ public class ServerGUI extends Application
 		sh.startServer(v, portNum, serverText);
 		
 		serverText.setEditable(false);
-		usersLabel.setStyle("-fx-border-style: solid inside;"
-				+ "-fx-border-width: 0.5px;"
-				+ "-fx-border-color: gray;"
-				+ "-fx-border-insets: 10 10 10 10;");
-		VBox onlinePanel = new VBox(usersLabel);
-		onlinePanel.setStyle("-fx-border-style: solid inside;"
-				+ "-fx-border-width: 0.5px;"
-				+ "-fx-border-color: gray;"
-				+ "-fx-border-insets: 10 10 10 10;");
 		
-		BorderPane pane = new BorderPane();
-		BorderPane.setAlignment(serverText, Pos.CENTER);
+		BorderPane pane = new BorderPane(serverText);
+		BorderPane.setMargin(serverText, new Insets(20));
 		
 		Scene scene = new Scene(pane, 500, 500);
 		scene.getStylesheets().add("style.css");
@@ -240,20 +224,6 @@ public class ServerGUI extends Application
 				}
 			}
 
-			return null;
-		}
-	}
-	
-	private class LabelUpdater extends Task<Void>
-	{
-		@Override
-		public Void call()
-		{
-			while(serviceRun)
-			{
-				updateMessage(us.getUsersOnline());
-			}
-			
 			return null;
 		}
 	}
