@@ -7,11 +7,17 @@ import java.util.Vector;
 
 import database.UserStatus;
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -23,6 +29,10 @@ public class ServerGUI extends Application
 	static Vector<StreamConnector> v;
 	ServerHelper sh;
 	UserStatus us;
+	private Label usersLabel;
+	
+	Task<Void> updater;
+	Task<Void> heartbeat;
 	
 	int portNum;
 	
@@ -31,11 +41,18 @@ public class ServerGUI extends Application
 		portNum = pn;
 		sh = new ServerHelper();
 		us = new UserStatus("127.0.0.1");
+		heartbeat = new ServerHeartbeat();
+		updater = new LabelUpdater();
+		new Thread(heartbeat).start();
+		new Thread(updater).start();
 	}
 	
 	@Override
 	public void start(Stage primaryStage)
 	{
+		usersLabel = new Label("Online:");
+		//users.textProperty().bind(updater.messageProperty());
+		
 		//Appends the text "Chat Server" to server log
 		serverText.appendText("Chat Server" + "\n");
 		
@@ -47,11 +64,20 @@ public class ServerGUI extends Application
 		sh.startServer(v, portNum, serverText);
 		
 		serverText.setEditable(false);
+		usersLabel.setStyle("-fx-border-style: solid inside;"
+				+ "-fx-border-width: 0.5px;"
+				+ "-fx-border-color: gray;"
+				+ "-fx-border-insets: 10 10 10 10;");
+		VBox onlinePanel = new VBox(usersLabel);
+		onlinePanel.setStyle("-fx-border-style: solid inside;"
+				+ "-fx-border-width: 0.5px;"
+				+ "-fx-border-color: gray;"
+				+ "-fx-border-insets: 10 10 10 10;");
 		
-		BorderPane pane = new BorderPane(serverText);
-		BorderPane.setMargin(serverText, new Insets(20));
+		BorderPane pane = new BorderPane();
+		BorderPane.setAlignment(serverText, Pos.CENTER);
 		
-		Scene scene = new Scene(pane, 400, 400);
+		Scene scene = new Scene(pane, 500, 500);
 		scene.getStylesheets().add("style.css");
 		
 		primaryStage.setOnCloseRequest(new WindowEventHandler());
@@ -71,11 +97,10 @@ public class ServerGUI extends Application
 				
 				for(int i = 0; i < v.size(); i++)
 				{
-					us.onlineStatus(v.get(i).username, false);
+					us.onlineStatus(v.get(i).getUser(), false);
 				}
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -112,7 +137,6 @@ public class ServerGUI extends Application
 				if(v.get(i).hasNextLine())
 				{
 					String message = v.get(i).getMSG();		
-					serverText.appendText(message + "\n");
 					
 					//@ Codes
 					if(message.contains("@"))
@@ -121,17 +145,25 @@ public class ServerGUI extends Application
 						{
 							if(message.contains("@" + v.get(k).getUser()))
 							{
-								System.out.println(v.get(k).getUser());
 								v.get(k).sendMSG(message);
 							}
 						}
 						v.get(i).sendMSG(message);
+						serverText.appendText(message + "\n");
+					}
+					
+					else if(message.equals(v.get(i).getUser()))
+					{
+						v.get(i).sendMSG("Connected...");
+						v.get(i).isBeating = true;
 					}
 					//Regular messaging service
 					else
 					{
 						for(int j = 0; j < v.size(); j++)
 							v.get(j).sendMSG(message);
+						
+						serverText.appendText(message + "\n");
 					}		
 					
 					if((!message.contains(":")) && message.contains("disconnected"))
@@ -172,6 +204,60 @@ public class ServerGUI extends Application
 			messenger.stopService();
 			ss.close();
 			scan.close();
+		}
+	}
+	
+	private class ServerHeartbeat extends Task<Void>
+	{
+		@Override
+		public Void call()
+		{
+			while(serviceRun)
+			{
+				for(int i = 0; i < v.size(); i++)
+				{
+					v.get(i).isBeating = false;
+				}
+				
+				try
+				{
+					Thread.sleep(20_000);
+				}
+				catch(InterruptedException e)
+				{
+					System.err.println("Fatal Error: Skipped_Beat");
+				}
+				
+				for(int i = 0; i < v.size(); i++)
+				{
+					if(!v.get(i).isBeating)
+					{
+						String message = v.get(i).getUser() + " disconnected\n";
+						v.remove(i);
+						
+						serverText.appendText(message);
+						
+						for(int j = 0; j < v.size(); j++)
+							v.get(j).sendMSG(message);
+					}
+				}
+			}
+
+			return null;
+		}
+	}
+	
+	private class LabelUpdater extends Task<Void>
+	{
+		@Override
+		public Void call()
+		{
+			while(serviceRun)
+			{
+				updateMessage(us.getUsersOnline());
+			}
+			
+			return null;
 		}
 	}
 }

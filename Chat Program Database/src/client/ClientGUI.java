@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+
 import database.UserStatus;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,23 +28,28 @@ import javafx.stage.WindowEvent;
 
 public class ClientGUI extends Application
 {
-	volatile boolean update = true;
+	volatile boolean isRunning = true;
 	
 	//Username for client
 	String username;
 	
+	
+	//String Property
+	StringProperty connectionStatus = new SimpleStringProperty(this, "connectionStatus", "Online");
+	
 	//Fields for the GUI interface
 	TextField messageText;
-	TextArea chatText;
+	TextArea chatText = new TextArea();
 	Button sendBtn;
 	Label users;
 	Label online;
 	Label status;
 	Label info;
+	Label connectionStatusLbl;
 	
 	//Task
 	Task<Void> updater;
-	Task<Void> heartbeat;
+	ClientHeartbeat heartbeat;
 	
 	//UserStatus
 	UserStatus us;
@@ -75,6 +83,10 @@ public class ClientGUI extends Application
 		//Updates label
 		updater = new LabelUpdater();
 		new Thread(updater).start();
+		
+		//Connection label
+		heartbeat = new ClientHeartbeat();
+		new Thread(heartbeat).start();
 	}
 	
 	@Override
@@ -82,12 +94,14 @@ public class ClientGUI extends Application
 	{
 		//Initializes GUI elements
 		messageText = new TextField();
-		chatText = new TextArea();
 		sendBtn = new Button("Send");
 		users = new Label("Online:");
 		online = new Label();
 		status = new Label("Status:");
 		info = new Label();
+		connectionStatusLbl = new Label();
+		
+		connectionStatusLbl.textProperty().bind(heartbeat.messageProperty());
 		
 		messageText.setOnKeyPressed(new key_EventHandler());
 		
@@ -116,9 +130,10 @@ public class ClientGUI extends Application
 				+ "-fx-border-color: gray;"
 				+ "-fx-border-insets: 20 10 10 10;");
 		
-		VBox statusPanel = new VBox(status, info);
+		VBox statusPanel = new VBox(status, info, connectionStatusLbl);
 		VBox.setMargin(status, new Insets(10, 30, 10, 30));
-		VBox.setMargin(info, new Insets(0, 30, 30, 30));
+		VBox.setMargin(info, new Insets(10, 30, 0, 30));
+		VBox.setMargin(connectionStatusLbl, new Insets(0, 30, 10, 30));
 		statusPanel.setPadding(new Insets(0, 0, 50, 0));
 		statusPanel.setStyle("-fx-border-style: solid inside;"
 				+ "-fx-border-width: 0.5px;"
@@ -155,7 +170,7 @@ public class ClientGUI extends Application
 	@Override
 	public void stop()
 	{
-		update = false;
+		isRunning = false;
 	}
 	
 	private class key_EventHandler implements EventHandler<KeyEvent>
@@ -199,6 +214,7 @@ public class ClientGUI extends Application
 				clientInput.println(username + " disconnected");
 				us.onlineStatus(username, false);
 				socket.close();
+				stop();
 			} 
 			catch (IOException e) 
 			{
@@ -223,7 +239,14 @@ public class ClientGUI extends Application
 				{
 					//Takes information from socket stream and appends it to text area box on client
 					message = ServerInput.nextLine();
-					chatText.appendText(message + "\n");
+					
+					if(message.equals("Connected..."))
+					{
+						heartbeat.setStatus(true);
+					}
+					
+					else
+						chatText.appendText(message + "\n");
 				}	
 				
 				ServerInput.close();
@@ -243,10 +266,56 @@ public class ClientGUI extends Application
 		@Override
 		public Void call()
 		{
-			while(update)
+			while(isRunning)
 				updateMessage(us.getUsersOnline());
 			
 			return null;
+		}
+	}
+	
+	private class ClientHeartbeat extends Task<Void>
+	{
+		private boolean isConnected;
+		
+		@Override
+		public Void call()
+		{
+			while(isRunning)
+			{
+				try 
+				{
+					isConnected = false;
+					clientInput.println(username);
+					updateMessage("Testing  ");
+					
+					Thread.sleep(10_000);
+					
+					if(!isConnected)
+					{
+						updateMessage("Disconnected");
+					}
+					
+					else
+					{
+						updateMessage("Connected");
+					}
+					
+					Thread.sleep(10_000);
+				} 
+				catch (InterruptedException e) 
+				{
+					System.err.println("Fatal Error: Skipped_Beat");
+				}
+				
+				
+			}
+			
+			return null;
+		}
+		
+		public void setStatus(boolean connection)
+		{
+			isConnected = connection;
 		}
 	}
 }

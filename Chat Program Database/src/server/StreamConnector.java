@@ -8,11 +8,12 @@ import java.util.Scanner;
 
 public class StreamConnector
 {
-	Scanner ClientInput;
-	PrintWriter ServerInput;
-	InputStream inputStream;
-	String username;
-	String IP;
+	private Scanner ClientInput;
+	private PrintWriter ServerInput;
+	private InputStream inputStream;
+	private String username;
+	private String IP;
+	boolean isBeating = true;
 	
 	public StreamConnector(Socket socket)
 	{

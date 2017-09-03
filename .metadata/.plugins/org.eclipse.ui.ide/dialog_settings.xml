@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\Austin\Documents\GitHub\Chat_Application"/>
 		<item value="C:\Users\Austin Frost\workspace\Chat_Application\Chat Program Database"/>
 		<item value="C:\Users\Austin Frost\workspace\Chat_Application\Chat Program"/>
 		<item value="C:\Users\Austin Frost\workspace\Chat_App\Chat Program Database"/>

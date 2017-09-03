@@ -1,0 +1,43 @@
+.root
+{
+ -fx-background-color: #2e2e2e;
+}
+
+.label
+{
+ -fx-text-fill: white;
+}
+
+.button
+{
+ -fx-background-color: black;
+ -fx-text-fill: white;
+}
+
+.button:hover
+{
+ -fx-background-color: white;
+ -fx-text-fill: black;
+}
+
+.text-field
+{
+ -fx-background-color: gray;
+ -fx-text-fill: black;
+}
+
+.password-field
+{
+ -fx-background-color: gray;
+ -fx-text-fill: black;
+}
+
+.text-area .content
+{
+ -fx-background-color: gray;
+}
+
+.text-area
+{
+ -fx-text-fill: black;
+}
