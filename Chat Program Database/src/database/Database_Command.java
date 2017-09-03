@@ -12,7 +12,7 @@ public class Database_Command
 		//Create a statement for the query
 		
 		//Connect to the database
-		connection = DriverManager.getConnection("jdbc:mysql://"+ IPAddress +":25568/application?autoReconnect=true&useSSL=false", "Java_Program", "Agentfrost1");
+		connection = DriverManager.getConnection("jdbc:mysql://"+ IPAddress +":25568/server_clients?autoReconnect=true&useSSL=false", "Java Program", "Agentfrost1");
 		statement = connection.createStatement();
 	}
 	
