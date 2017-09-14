@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+//import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -46,6 +47,7 @@ public class ServerGUIStart extends Application
 		Scene scene = new Scene(portBox);
 		scene.getStylesheets().add("style.css");
 		
+		//primaryStage.getIcons().add(new Image(""));
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Welcome");
 		primaryStage.show();

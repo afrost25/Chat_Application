@@ -26,7 +26,7 @@ public class StreamConnector
 			IP = ClientInput.nextLine();
 			username = ClientInput.nextLine();
 			
-			ServerInput.println("Welcome " + username);
+			//ServerInput.println("Welcome " + username);
 			
 		}
 		catch(IOException e)

@@ -21,6 +21,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+//import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
@@ -110,9 +111,10 @@ public class ClientGUIStart extends Application
 		BorderPane border = new BorderPane();
 		border.setCenter(vboxButton);
 		
-		Scene scene = new Scene(border, 250, 200);
+		Scene scene = new Scene(border, 280, 200);
 		scene.getStylesheets().add("style.css");
 		
+		//primaryStage.getIcons().add(new Image(""));
 		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Welcome!");
@@ -145,7 +147,7 @@ public class ClientGUIStart extends Application
 			
 			//Launches ClientGUI after successful connection to server. 
 			//Passes the socket and username as parameters for the class
-			stage.setResizable(true);
+			//stage.setResizable(true);
 			new ClientGUI(s, userText.getText()).start(stage);
 		}
 		

@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+//import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -61,6 +62,7 @@ public class ServerGUI extends Application
 		Scene scene = new Scene(pane, 500, 500);
 		scene.getStylesheets().add("style.css");
 		
+		//primaryStage.getIcons().add(new Image(""));
 		primaryStage.setOnCloseRequest(new WindowEventHandler());
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Server Log");

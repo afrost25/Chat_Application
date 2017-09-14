@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import database.UserStatus;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
@@ -17,12 +18,16 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+//import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+//import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -32,14 +37,15 @@ public class ClientGUI extends Application
 	
 	//Username for client
 	String username;
-	
+	String message;
 	
 	//String Property
 	StringProperty connectionStatus = new SimpleStringProperty(this, "connectionStatus", "Online");
 	
 	//Fields for the GUI interface
+	ScrollPane sp;
 	TextField messageText;
-	TextArea chatText = new TextArea();
+	TextFlow chatText;
 	Button sendBtn;
 	Label users;
 	Label online;
@@ -93,20 +99,28 @@ public class ClientGUI extends Application
 	public void init()
 	{
 		//Initializes GUI elements
+		chatText = new TextFlow();
+		sp = new ScrollPane(chatText);
 		messageText = new TextField();
 		sendBtn = new Button("Send");
 		users = new Label("Online:");
 		online = new Label();
 		status = new Label("Status:");
 		info = new Label();
+		
+		chatText.setPadding(new Insets(10));
+		
 		connectionStatusLbl = new Label();
 		
 		connectionStatusLbl.textProperty().bind(heartbeat.messageProperty());
 		
 		messageText.setOnKeyPressed(new key_EventHandler());
 		
+		sp.setStyle("-fx-background: gray");
+		
 		sendBtn.setMaxWidth(100);
-		chatText.setEditable(false);
+		//chatText.setEditable(false);
+		//chatText.setWrapText(true);
 		sendBtn.setOnAction(new click_EventHandler());
 		
 		info.setText("Server IP: " + socket.getInetAddress().getHostAddress() +"\n"
@@ -142,22 +156,26 @@ public class ClientGUI extends Application
 		
 		VBox rootPanel = new VBox(onlinePanel, statusPanel);
 		
-		VBox messenger = new VBox(chatText, messageText, sendBtn);
+		VBox messenger = new VBox(messageText, sendBtn);
 		messenger.setAlignment(Pos.CENTER);
-		messenger.setPadding(new Insets(10));
-		VBox.setVgrow(chatText, Priority.ALWAYS);
+		messenger.setPadding(new Insets(10,10,10,210));
 		VBox.setMargin(messageText, new Insets(10));
-		VBox.setMargin(sendBtn, new Insets(10));
-		VBox.setMargin(chatText, new Insets(10));
-		
+		VBox.setMargin(sendBtn, new Insets(10));	
 		
 		BorderPane pane = new BorderPane();
-		pane.setCenter(messenger);
+		pane.setCenter(sp);
+		pane.setBottom(messenger);
 		pane.setLeft(rootPanel);
 		
-		Scene scene = new Scene(pane, 500, 500);
+		BorderPane.setMargin(sp, new Insets(20,20,20,10));
+		
+		Scene scene = new Scene(pane);
 		scene.getStylesheets().add("style.css");
 		
+		//primaryStage.getIcons().add(new Image(""));
+		primaryStage.setHeight(500);
+		primaryStage.setWidth(500);
+		primaryStage.setResizable(true);
 		primaryStage.setOnCloseRequest(new close_EventHandler());
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Chat Client");
@@ -194,7 +212,6 @@ public class ClientGUI extends Application
 		{
 			if(e.getSource() == sendBtn)
 			{
-				
 				clientInput.println(username + ": " + messageText.getText());
 				
 				//Clears textbox
@@ -229,11 +246,12 @@ public class ClientGUI extends Application
 		@Override
 		public Void call()
 		{
+			
+			Platform.runLater(()->{chatText.getChildren().add(new Text("Welcome " + username + "\n"));});
 			try
 			{
 				//Scans for information in the socket stream
 				Scanner ServerInput = new Scanner(socket.getInputStream());
-				String message = "";
 				
 				while(ServerInput.hasNext())
 				{
@@ -246,7 +264,29 @@ public class ClientGUI extends Application
 					}
 					
 					else
-						chatText.appendText(message + "\n");
+					{
+						Text styledMessage = new Text();
+						
+						if((message.contains("has joined the chat") || message.contains("has disconnected"))&& !message.contains(":"))
+						{
+							styledMessage.setText(message + "\n");
+							styledMessage.setFill(Color.TURQUOISE);
+							styledMessage.setStyle("-fx-font-weight: bold");
+							
+							Platform.runLater(()->{chatText.getChildren().add(styledMessage);});
+						}
+						
+						else
+						{
+							Text user = new Text(message.substring(0, message.indexOf(":")));
+							user.setFill(Color.TURQUOISE);
+							user.setStyle("-fx-font-weight: bold");
+							
+							Platform.runLater(()->{chatText.getChildren().addAll(user, new Text(message.substring(message.indexOf(":")) + "\n"));});
+						}
+						
+						
+					}
 				}	
 				
 				ServerInput.close();
